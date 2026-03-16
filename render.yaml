@@ -9,7 +9,7 @@ services:
       - key: MONGO_URI
         sync: false
 
-  - type: static_site
+  - type: static
     name: easymeet-frontend
     rootDir: Frontend
     buildCommand: npm install && npm run build
