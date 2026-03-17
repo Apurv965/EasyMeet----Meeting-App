@@ -14,8 +14,6 @@ const server = createServer(app);
 const io = connectToSocket(server);
 const defaultMongoUri = "mongodb://127.0.0.1:27017/easymeet";
 const mongoUri = process.env.MONGO_URI || defaultMongoUri;
-const host = process.env.HOST || "127.0.0.1";
-
 app.set("port", (process.env.PORT || 8000))
 app.use(cors());
 app.use(express.json({limit: "40kb"}));
@@ -69,12 +67,12 @@ mongoose.connection.on("error", (error) => {
 
 const start = async() => {
     server.on("error", (error) => {
-        console.error(`Failed to start server on ${host}:${app.get("port")}.`);
+        console.error(`Failed to start server on port ${app.get("port")}.`);
         console.error(error);
     });
 
-    server.listen(app.get("port"), host, () => {
-        console.log(`Listening on http://${host}:${app.get("port")}`);
+    server.listen(app.get("port"), () => {
+        console.log(`Listening on port ${app.get("port")}`);
     });
 
     await connectDatabase();
